@@ -1,6 +1,10 @@
 package com.mkyong.dao;
- 
+
+import com.mkyong.model.Entity;
+
+import java.util.List;
+
 public interface EntityDao {
- 
-	String save();
+
+	List<Entity> query(String sql);
 }
