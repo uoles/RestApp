@@ -1,6 +1,6 @@
-package com.mkyong.aspect;
+package ru.uoles.proj.aspect;
 
-import com.mkyong.rest.RestController;
+import ru.uoles.proj.rest.RestController;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +15,7 @@ public class LogAspect {
 
     private final Logger logger = LoggerFactory.getLogger(RestController.class);
 
-    @Pointcut("execution(public * com.mkyong.rest.RestController.*(..))")
+    @Pointcut("execution(public * ru.uoles.proj.rest.RestController.*(..))")
     private void selectAllPublic() {}
 
     @AfterThrowing(pointcut = "selectAllPublic()", throwing = "ex")

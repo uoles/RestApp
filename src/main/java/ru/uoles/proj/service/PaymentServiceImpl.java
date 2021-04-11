@@ -1,7 +1,7 @@
-package com.mkyong.service;
+package ru.uoles.proj.service;
 
-import com.mkyong.dao.EntityDao;
-import com.mkyong.model.Entity;
+import ru.uoles.proj.dao.EntityDao;
+import ru.uoles.proj.model.Entity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

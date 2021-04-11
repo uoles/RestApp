@@ -1,4 +1,4 @@
-package com.mkyong.model;
+package ru.uoles.proj.model;
 
 public class Entity {
 

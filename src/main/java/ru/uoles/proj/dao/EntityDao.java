@@ -1,6 +1,6 @@
-package com.mkyong.dao;
+package ru.uoles.proj.dao;
 
-import com.mkyong.model.Entity;
+import ru.uoles.proj.model.Entity;
 
 import java.util.List;
 

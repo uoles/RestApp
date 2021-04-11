@@ -1,11 +1,11 @@
-package com.mkyong.rest;
+package ru.uoles.proj.rest;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
-import com.mkyong.model.Entity;
-import com.mkyong.service.PaymentService;
+import ru.uoles.proj.model.Entity;
+import ru.uoles.proj.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -22,6 +22,6 @@ public class RestController {
 	@Path("/getEntities")
 	public Response getEntities() {
 		List<Entity> result = paymentService.getEntities();
-		return Response.status(200).entity("ok").build();
+		return Response.status(200).entity("Hello World from rest service!").build();
 	}
 }

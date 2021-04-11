@@ -1,6 +1,6 @@
-package com.mkyong.dao.mapper;
+package ru.uoles.proj.dao.mapper;
 
-import com.mkyong.model.Entity;
+import ru.uoles.proj.model.Entity;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

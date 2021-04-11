@@ -1,4 +1,4 @@
-package com.mkyong.translator;
+package ru.uoles.proj.translator;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DuplicateKeyException;

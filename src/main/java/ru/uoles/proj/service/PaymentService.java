@@ -1,6 +1,6 @@
-package com.mkyong.service;
+package ru.uoles.proj.service;
 
-import com.mkyong.model.Entity;
+import ru.uoles.proj.model.Entity;
 
 import java.util.List;
 

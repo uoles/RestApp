@@ -13,12 +13,12 @@
 
 	<context:annotation-config />
 	<aop:aspectj-autoproxy />
-	<context:component-scan base-package="com.mkyong" />
+	<context:component-scan base-package="ru.uoles.proj" />
 	<util:properties id="settings" location="classpath:/application.properties"/>
 	
-	<bean id="entityDao" class="com.mkyong.dao.EntityDaoImpl" />
-	<bean id="paymentService" class="com.mkyong.service.PaymentServiceImpl" />
-	<bean id="logAspect" class="com.mkyong.aspect.LogAspect" />
+	<bean id="entityDao" class="ru.uoles.proj.dao.EntityDaoImpl" />
+	<bean id="paymentService" class="ru.uoles.proj.service.PaymentServiceImpl" />
+	<bean id="logAspect" class="ru.uoles.proj.aspect.LogAspect" />
 
 	<bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
 		<constructor-arg ref="jdbcTemplate"/>
@@ -29,7 +29,7 @@
 		<property name="exceptionTranslator" ref="customSQLErrorCodeTranslator"/>
 	</bean>
 
-	<bean id="customSQLErrorCodeTranslator" class="com.mkyong.translator.CustomSQLErrorCodeTranslator" />
+	<bean id="customSQLErrorCodeTranslator" class="ru.uoles.proj.translator.CustomSQLErrorCodeTranslator" />
 
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="#{settings['db.driver']}"/>

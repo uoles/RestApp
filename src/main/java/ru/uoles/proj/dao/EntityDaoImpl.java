@@ -1,8 +1,8 @@
-package com.mkyong.dao;
+package ru.uoles.proj.dao;
 
-import com.mkyong.dao.mapper.EntityMapper;
-import com.mkyong.model.Entity;
-import com.mkyong.rest.RestController;
+import ru.uoles.proj.dao.mapper.EntityMapper;
+import ru.uoles.proj.model.Entity;
+import ru.uoles.proj.rest.RestController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,17 +26,9 @@ public class EntityDaoImpl implements EntityDao {
 		try {
 			entities = namedParameterJdbcTemplate.query(sql, new EntityMapper());
 		} catch (DataAccessException e) {
-//			logger.error("Database error", e);
-
-			Throwable t = e.getCause();
-			while(t != null) {
-				if (t instanceof SQLException) {
-					System.out.println("Cause: " + t.getMessage());
-				}
-				t = t.getCause();
-			}
-
-//			throw e;
+			logger.error("Database error: {}", e.getMessage());
+		} catch (Exception e) {
+			logger.error("Error: {}", e.getMessage());
 		}
 		return entities == null ? new ArrayList<>() : entities;
 	}
