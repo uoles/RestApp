@@ -2,17 +2,22 @@ package ru.uoles.proj.model;
 
 public class Entity {
 
-    private String id;
+    private Long id;
     private String text;
 
     public Entity() {
     }
 
-    public String getId() {
+    public Entity(Long id, String text) {
+        this.id = id;
+        this.text = text;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

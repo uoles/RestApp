@@ -22,6 +22,10 @@ public class RestController {
 	@Path("/getEntities")
 	public Response getEntities() {
 		List<Entity> result = paymentService.getEntities();
-		return Response.status(200).entity("Hello World from rest service!").build();
+
+		String response = (result != null && !result.isEmpty()) ? result.get(0).getText() : "List is empty";
+		return Response.status(200)
+				.entity("Hello World from rest service! Response: " + response)
+				.build();
 	}
 }
