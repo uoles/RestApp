@@ -3,8 +3,8 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.mkyong.common</groupId>
-	<artifactId>RESTfulExample</artifactId>
+	<groupId>ru.uoles.proj</groupId>
+	<artifactId>rest-service-example</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
 	<packaging>war</packaging>
