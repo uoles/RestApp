@@ -2,6 +2,7 @@
 	   xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:util="http://www.springframework.org/schema/util" xmlns:aop="http://www.springframework.org/schema/aop"
 	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
        http://www.springframework.org/schema/util
@@ -9,13 +10,13 @@
        http://www.springframework.org/schema/aop
        http://www.springframework.org/schema/aop/spring-aop.xsd
        http://www.springframework.org/schema/context
-       http://www.springframework.org/schema/context/spring-context.xsd">
+       http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
 	<context:annotation-config />
 	<aop:aspectj-autoproxy />
 	<context:component-scan base-package="ru.uoles.proj" />
 	<util:properties id="settings" location="classpath:/application.properties"/>
-	
+
 	<bean id="entityDao" class="ru.uoles.proj.dao.EntityDaoImpl" />
 	<bean id="paymentService" class="ru.uoles.proj.service.PaymentServiceImpl" />
 	<bean id="logAspect" class="ru.uoles.proj.aspect.LogAspect" />
@@ -31,10 +32,27 @@
 
 	<bean id="customSQLErrorCodeTranslator" class="ru.uoles.proj.translator.CustomSQLErrorCodeTranslator" />
 
-	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-		<property name="driverClassName" value="#{settings['db.driver']}"/>
-		<property name="url" value="#{settings['db.connection']}"/>
-		<property name="username" value="#{settings['db.login']}"/>
-		<property name="password" value="#{settings['db.password']}"/>
+<!--	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">-->
+<!--		<property name="driverClassName" value="#{settings['db.driver']}"/>-->
+<!--		<property name="url" value="#{settings['db.connection']}"/>-->
+<!--		<property name="username" value="#{settings['db.login']}"/>-->
+<!--		<property name="password" value="#{settings['db.password']}"/>-->
+<!--	</bean>-->
+
+<!--	<jdbc:embedded-database id="dataSource" type="H2">-->
+<!--		<jdbc:script location="classpath:/db/h2-schema.sql"/>-->
+<!--		<jdbc:script location="classpath:/db/h2-data.sql"/>-->
+<!--	</jdbc:embedded-database>-->
+
+	<jdbc:initialize-database data-source="dataSource">
+		<jdbc:script location="classpath:/db/h2-schema.sql"/>
+		<jdbc:script location="classpath:/db/h2-data.sql"/>
+	</jdbc:initialize-database>
+
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="org.h2.Driver" />
+		<property name="url" value="jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=Oracle;TRACE_LEVEL_SYSTEM_OUT=2" />
+		<property name="username" value="SA" />
+		<property name="password" value="" />
 	</bean>
  </beans>

@@ -38,8 +38,8 @@ class RestControllerTest {
         List<Entity> entities = new ArrayList<>();
         entities.add(new Entity(1L, "TEST"));
 
-        Mockito.doReturn(entities).when(paymentService).getEntities();
-        Response response = restController.getEntities();
+        Mockito.doReturn(entities).when(paymentService).getEntities("TestParam");
+        Response response = restController.getEntities("TestParam");
 
         assertNotNull(response.getEntity());
         assertEquals("Hello World from rest service! Response: TEST", response.getEntity());

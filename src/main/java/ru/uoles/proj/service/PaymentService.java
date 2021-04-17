@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface PaymentService {
 
-    List<Entity> getEntities();
+    List<Entity> getEntities(String param);
 }

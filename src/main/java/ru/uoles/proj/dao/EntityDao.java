@@ -1,10 +1,11 @@
 package ru.uoles.proj.dao;
 
-import ru.uoles.proj.model.Entity;
+import org.springframework.jdbc.core.RowMapper;
 
 import java.util.List;
+import java.util.Map;
 
 public interface EntityDao {
 
-	List<Entity> query(String sql);
+	<T> List<T> query(String sql, Map<String, Object> params, RowMapper<T> rowMapper);
 }

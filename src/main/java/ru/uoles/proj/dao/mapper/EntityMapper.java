@@ -10,6 +10,9 @@ public class EntityMapper implements RowMapper<Entity> {
 
     @Override
     public Entity mapRow(ResultSet resultSet, int i) throws SQLException {
-        return null;
+        final Long id = resultSet.getLong("id");
+        final String text = resultSet.getString("text");
+
+        return new Entity(id, text);
     }
 }

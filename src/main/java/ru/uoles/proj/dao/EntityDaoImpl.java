@@ -1,5 +1,6 @@
 package ru.uoles.proj.dao;
 
+import org.springframework.jdbc.core.RowMapper;
 import ru.uoles.proj.dao.mapper.EntityMapper;
 import ru.uoles.proj.model.Entity;
 import ru.uoles.proj.rest.RestController;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class EntityDaoImpl implements EntityDao {
@@ -21,15 +23,18 @@ public class EntityDaoImpl implements EntityDao {
 	@Autowired
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-	public List<Entity> query(String sql) {
-		List<Entity> entities = null;
+	public <T> List<T> query(String sql, Map<String, Object> params, RowMapper<T> rowMapper) {
+		List<T> entities = null;
 		try {
-			entities = namedParameterJdbcTemplate.query(sql, new EntityMapper());
+			entities = namedParameterJdbcTemplate.query(sql, params, rowMapper);
 		} catch (DataAccessException e) {
 			logger.error("Database error: {}", e.getMessage());
 		} catch (Exception e) {
 			logger.error("Error: {}", e.getMessage());
 		}
-		return entities == null ? new ArrayList<>() : entities;
+
+		return entities == null
+				? new ArrayList<>()
+				: entities;
 	}
 }
