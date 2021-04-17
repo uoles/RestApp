@@ -30,7 +30,7 @@
 		<property name="exceptionTranslator" ref="customSQLErrorCodeTranslator"/>
 	</bean>
 
-	<bean id="customSQLErrorCodeTranslator" class="ru.uoles.proj.translator.CustomSQLErrorCodeTranslator" />
+	<bean id="customSQLErrorCodeTranslator" class="ru.uoles.proj.dao.translator.CustomSQLErrorCodeTranslator" />
 
 <!--	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">-->
 <!--		<property name="driverClassName" value="#{settings['db.driver']}"/>-->

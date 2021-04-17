@@ -18,7 +18,7 @@ import java.util.Map;
 @Repository
 public class EntityDaoImpl implements EntityDao {
 
-	private final Logger logger = LoggerFactory.getLogger(RestController.class);
+	private final Logger logger = LoggerFactory.getLogger(EntityDaoImpl.class);
 
 	@Autowired
 	private NamedParameterJdbcTemplate namedParameterJdbcTemplate;

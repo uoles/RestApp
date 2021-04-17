@@ -9,6 +9,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import ru.uoles.proj.model.Entity;
 import ru.uoles.proj.service.PaymentService;
+import ru.uoles.proj.util.ObjectConverter;
 
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
@@ -35,13 +36,13 @@ class RestControllerTest {
     @Test
     @DisplayName("Вызов метода getEntities")
     void getEntitiesTest() {
-        List<Entity> entities = new ArrayList<>();
-        entities.add(new Entity(1L, "TEST"));
+        List<Entity> expected = new ArrayList<>();
+        expected.add(new Entity(1L, "TEST"));
 
-        Mockito.doReturn(entities).when(paymentService).getEntities("TestParam");
+        Mockito.doReturn(expected).when(paymentService).getEntities("TestParam");
         Response response = restController.getEntities("TestParam");
 
         assertNotNull(response.getEntity());
-        assertEquals("Hello World from rest service! Response: TEST", response.getEntity());
+        assertEquals(ObjectConverter.toJson(expected), response.getEntity());
     }
 }

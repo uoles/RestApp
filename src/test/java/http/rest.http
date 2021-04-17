@@ -6,7 +6,7 @@ Content-Encoding: utf-8
 
 > {%
 client.test("Request executed successfully", function() {
-  client.assert(response.body === "Hello World from rest service! Response: text1", "WORK");
+  client.assert(response.body === "[{\"id\":1,\"text\":\"text1\"}]", "WORK");
 });
 %}
 
