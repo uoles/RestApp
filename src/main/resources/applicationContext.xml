@@ -17,8 +17,14 @@
 	<context:component-scan base-package="ru.uoles.proj" />
 	<util:properties id="settings" location="classpath:/application.properties"/>
 
-	<bean id="entityDao" class="ru.uoles.proj.dao.EntityDaoImpl" />
-	<bean id="paymentService" class="ru.uoles.proj.service.PaymentServiceImpl" />
+	<bean id="entityDao" class="ru.uoles.proj.dao.EntityDaoImpl">
+		<constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate" />
+	</bean>
+
+	<bean id="paymentService" class="ru.uoles.proj.service.PaymentServiceImpl">
+		<constructor-arg name="entityDao" ref="entityDao" />
+	</bean>
+
 	<bean id="logAspect" class="ru.uoles.proj.aspect.LogAspect" />
 
 	<bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
@@ -32,27 +38,15 @@
 
 	<bean id="customSQLErrorCodeTranslator" class="ru.uoles.proj.dao.translator.CustomSQLErrorCodeTranslator" />
 
-<!--	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">-->
-<!--		<property name="driverClassName" value="#{settings['db.driver']}"/>-->
-<!--		<property name="url" value="#{settings['db.connection']}"/>-->
-<!--		<property name="username" value="#{settings['db.login']}"/>-->
-<!--		<property name="password" value="#{settings['db.password']}"/>-->
-<!--	</bean>-->
-
-<!--	<jdbc:embedded-database id="dataSource" type="H2">-->
-<!--		<jdbc:script location="classpath:/db/h2-schema.sql"/>-->
-<!--		<jdbc:script location="classpath:/db/h2-data.sql"/>-->
-<!--	</jdbc:embedded-database>-->
-
-	<jdbc:initialize-database data-source="dataSource">
-		<jdbc:script location="classpath:/db/h2-schema.sql"/>
-		<jdbc:script location="classpath:/db/h2-data.sql"/>
-	</jdbc:initialize-database>
-
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="org.h2.Driver" />
 		<property name="url" value="jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=Oracle;TRACE_LEVEL_SYSTEM_OUT=2" />
 		<property name="username" value="SA" />
 		<property name="password" value="" />
 	</bean>
- </beans>
+
+	<jdbc:initialize-database data-source="dataSource">
+		<jdbc:script location="classpath:/db/h2-schema.sql"/>
+		<jdbc:script location="classpath:/db/h2-data.sql"/>
+	</jdbc:initialize-database>
+</beans>

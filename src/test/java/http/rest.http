@@ -1,7 +1,7 @@
-GET http://localhost:8081/rest/payment/getEntities/message1
+GET http://localhost:8081/rest/payment/getEntities/param=message1
 #GET http://localhost:8081/rest/payment/getEntities/1'%20or%20'1'='1
 #GET http://localhost:8081/rest/payment/getEntities/1'%20or%20'1'='1
-Content-Type: text/html
+Content-Type: application/json
 Content-Encoding: utf-8
 
 > {%
