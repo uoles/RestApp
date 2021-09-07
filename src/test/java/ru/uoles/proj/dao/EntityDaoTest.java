@@ -37,11 +37,12 @@ class EntityDaoTest {
         oracleContainer.start();
         System.out.println("===== initDockerDB: start");
 
-        ScriptUtils.executeSqlScript(dataSource(oracleContainer).getConnection(), new ClassPathResource("db_test/h2-schema.sql"));
-        ScriptUtils.executeSqlScript(dataSource(oracleContainer).getConnection(), new ClassPathResource("db_test/h2-data.sql"));
+        ScriptUtils.executeSqlScript(dataSourceSystem(oracleContainer).getConnection(), new ClassPathResource("db_test/oracle-schema.sql"));
+        ScriptUtils.executeSqlScript(dataSourceTest(oracleContainer).getConnection(), new ClassPathResource("db_test/oracle-tables.sql"));
+        ScriptUtils.executeSqlScript(dataSourceTest(oracleContainer).getConnection(), new ClassPathResource("db_test/oracle-data.sql"));
         System.out.println("===== initDockerDB: sql scripts loads");
 
-        entityDao = new EntityDaoImpl(new NamedParameterJdbcTemplate(dataSource(oracleContainer)));
+        entityDao = new EntityDaoImpl(new NamedParameterJdbcTemplate(dataSourceTest(oracleContainer)));
     }
 
     @Test
@@ -69,11 +70,20 @@ class EntityDaoTest {
         System.out.println("===== closeDockerDB: close");
     }
 
-    private DataSource dataSource(OracleContainer oracleContainer) throws SQLException {
+    private DataSource dataSourceSystem(OracleContainer oracleContainer) throws SQLException {
         OracleDataSource dataSource = new OracleDataSource();
         dataSource.setURL(oracleContainer.getJdbcUrl());
         dataSource.setUser("system");
         dataSource.setPassword("oracle");
+        dataSource.setDriverType(oracleContainer.getDriverClassName());
+        return dataSource;
+    }
+
+    private DataSource dataSourceTest(OracleContainer oracleContainer) throws SQLException {
+        OracleDataSource dataSource = new OracleDataSource();
+        dataSource.setURL(oracleContainer.getJdbcUrl());
+        dataSource.setUser("TEST");
+        dataSource.setPassword("test");
         dataSource.setDriverType(oracleContainer.getDriverClassName());
         return dataSource;
     }
