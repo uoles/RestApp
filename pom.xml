@@ -21,8 +21,8 @@
 		<junit.platform.version>1.5.2</junit.platform.version>
 		<junit.platform.version>1.5.2</junit.platform.version>
 
-		<oracle.test.port>1521</oracle.test.port>
-		<oracle.test.pw>root</oracle.test.pw>
+<!--		<oracle.test.port>1521</oracle.test.port>-->
+<!--		<oracle.test.pw>oracle</oracle.test.pw>-->
 	</properties>
 
 	<dependencies>
@@ -292,49 +292,49 @@
 				</configuration>
 			</plugin>
 
-			<plugin>
-				<groupId>io.fabric8</groupId>
-				<artifactId>docker-maven-plugin</artifactId>
-				<version>0.37.0</version>
-				<configuration>
-					<images>
-						<image>
-							<name>oracleinanutshell/oracle-xe-11g:latest</name>
-							<alias>oracle-db</alias>
-							<run>
-								<env>
-									<MYSQL_ROOT_PASSWORD>${oracle.test.pw}</MYSQL_ROOT_PASSWORD>
-								</env>
-								<ports>
-									<port>${oracle.test.port}:1521</port>
-								</ports>
-								<wait>
-									<!-- time based waiting is the only option, because TCP-based or log-based polling are not reliable.
-                                    see https://github.com/fabric8io/docker-maven-plugin/issues/328
-                                    Alternatively we can wait log- or tcp-based and try to connect for a while in the test code -->
-									<time>8000</time>
-								</wait>
-							</run>
-						</image>
-					</images>
-				</configuration>
-				<executions>
-					<execution>
-						<id>start</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>start</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>stop</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>stop</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>io.fabric8</groupId>-->
+<!--				<artifactId>docker-maven-plugin</artifactId>-->
+<!--				<version>0.37.0</version>-->
+<!--				<configuration>-->
+<!--					<images>-->
+<!--						<image>-->
+<!--							<name>oracleinanutshell/oracle-xe-11g:latest</name>-->
+<!--							<alias>oracle-db</alias>-->
+<!--							<run>-->
+<!--								<env>-->
+<!--									<ORACLE_PASSWORD>${oracle.test.pw}</ORACLE_PASSWORD>-->
+<!--								</env>-->
+<!--								<ports>-->
+<!--									<port>${oracle.test.port}:1521</port>-->
+<!--								</ports>-->
+<!--								<wait>-->
+<!--									&lt;!&ndash; time based waiting is the only option, because TCP-based or log-based polling are not reliable.-->
+<!--                                    see https://github.com/fabric8io/docker-maven-plugin/issues/328-->
+<!--                                    Alternatively we can wait log- or tcp-based and try to connect for a while in the test code &ndash;&gt;-->
+<!--									<time>8000</time>-->
+<!--								</wait>-->
+<!--							</run>-->
+<!--						</image>-->
+<!--					</images>-->
+<!--				</configuration>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>start</id>-->
+<!--						<phase>pre-integration-test</phase>-->
+<!--						<goals>-->
+<!--							<goal>start</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--					<execution>-->
+<!--						<id>stop</id>-->
+<!--						<phase>post-integration-test</phase>-->
+<!--						<goals>-->
+<!--							<goal>stop</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
 		</plugins>
 	</build>
 </project>
